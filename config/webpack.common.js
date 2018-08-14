@@ -4,15 +4,21 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+function resolve (dir) {
+    return path.join(__dirname, '..', dir)
+}
+
 module.exports = {
     entry: ["babel-polyfill", "./src/index.js"],
     output: {
         path: path.resolve(__dirname, '../dist'),
         filename: '[name].[contenthash:12].js'
     },
-    resolve:{
-        alias:{
-            'vue$':'vue/dist/vue.js'
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': resolve('src'),
         }
     },
     module: {
